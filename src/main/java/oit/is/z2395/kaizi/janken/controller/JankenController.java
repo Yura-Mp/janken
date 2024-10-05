@@ -28,9 +28,9 @@ public class JankenController {
     String result;
     String cpuHand;
 
-    cpuHand = "Gu";
+    cpuHand = Janken.hand_short_to_str(Janken.cpu_choice_hand(Janken.hand_str_to_short(userHand)));
 
-    switch (Janken.judge(Janken.str_to_short(userHand), Janken.str_to_short(cpuHand))) {
+    switch (Janken.judge(Janken.hand_str_to_short(userHand), Janken.hand_str_to_short(cpuHand))) {
       case 1:
         result = "You Win!";
         break;
