@@ -12,10 +12,12 @@
 </head>
 
 <body>
-  <form action="/janken" method="post">
-    <input type="text" name="user_name" />
-    <input type="submit" value="入室" />
-  </form>
+  <h1>Janken GAME!</h1>
+
+  <div th:if="${user_name}"> Hi [[${user_name}]] </div>
+  <br />
+
+  <a href="">ぐー</a> <a href="">ちょき</a> <a href="">ぱー</a>
 
 </body>
 
