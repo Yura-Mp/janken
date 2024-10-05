@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import oit.is.z2395.kaizi.janken.model.Janken;
+
 @Controller
 public class JankenController {
   @GetMapping("/janken")
@@ -15,8 +17,40 @@ public class JankenController {
   }
 
   @PostMapping("/janken")
-  public String join_game(@RequestParam String user_name, ModelMap model) {
-    model.addAttribute("user_name", user_name);
+  public String join_game(@RequestParam String userName, ModelMap model) {
+    model.addAttribute("userName", userName);
+
+    return "janken.html";
+  }
+
+  @GetMapping("/play_janken/{userHand}")
+  public String play_game(@PathVariable String userHand, ModelMap model) {
+    String result;
+    String cpuHand;
+
+    cpuHand = "Gu";
+
+    switch (Janken.judge(Janken.str_to_short(userHand), Janken.str_to_short(cpuHand))) {
+      case 1:
+        result = "You Win!";
+        break;
+
+      case 0:
+        result = "Draw.";
+        break;
+
+      case -1:
+        result = "You Lose.";
+        break;
+
+      default:
+        result = "Occurred Undefined Error.";
+        break;
+    }
+
+    model.addAttribute("userHand", userHand);
+    model.addAttribute("opponentHand", cpuHand);
+    model.addAttribute("jankenResult", result);
 
     return "janken.html";
   }

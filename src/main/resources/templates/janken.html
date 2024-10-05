@@ -14,10 +14,13 @@
 <body>
   <h1>Janken GAME!</h1>
 
-  <div th:if="${user_name}"> Hi [[${user_name}]] </div>
-  <br />
+  <p th:if="${userName}"> Hi [[${userName}]] </p>
 
-  <a href="">ぐー</a> <a href="">ちょき</a> <a href="">ぱー</a>
+  <a href="/play_janken/Gu">ぐー</a> <a href="/play_janken/Choki">ちょき</a> <a href="/play_janken/Pa">ぱー</a>
+
+  <div th:if="${userHand}">あなたの手 [[${userHand}]]</div>
+  <div th:if="${opponentHand}">相手の手 [[${opponentHand}]]</div>
+  <div th:if="${jankenResult}">結果 [[${jankenResult}]]</div>
 
 </body>
 
