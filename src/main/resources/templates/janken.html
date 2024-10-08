@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
 
 <head>
   <meta charset="UTF-8" />
@@ -14,6 +14,7 @@
 <body>
   <h1>Janken GAME!</h1>
 
+  <div><a href="/logout">ログアウト</a></div>
   <p th:if="${userName}"> Hi [[${userName}]] </p>
 
   <a href="/play_janken/Gu">ぐー</a> <a href="/play_janken/Choki">ちょき</a> <a href="/play_janken/Pa">ぱー</a>
@@ -21,6 +22,13 @@
   <div th:if="${userHand}">あなたの手 [[${userHand}]]</div>
   <div th:if="${opponentHand}">相手の手 [[${opponentHand}]]</div>
   <div th:if="${jankenResult}">結果 [[${jankenResult}]]</div>
+
+  <div th:if="${entry}">
+    <ul>
+      <b>エントリーユーザ: </b>
+      <li th:each="user : ${entry.users}">[[${user}]]</li>
+    </ul>
+  </div>
 
 </body>
 
