@@ -1,5 +1,8 @@
 package oit.is.z2395.kaizi.janken.controller;
 
+import java.security.Principal;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,17 +11,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import oit.is.z2395.kaizi.janken.model.Janken;
+import oit.is.z2395.kaizi.janken.model.Entry;
 
 @Controller
 public class JankenController {
-  @GetMapping("/janken")
-  public String join_game_directly() {
-    return "janken.html";
-  }
+  @Autowired
+  private Entry entry = new Entry();
 
-  @PostMapping("/janken")
-  public String join_game(@RequestParam String userName, ModelMap model) {
-    model.addAttribute("userName", userName);
+  @GetMapping("/janken")
+  public String join_game(Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    model.addAttribute("userName", loginUser);
+
+    entry.addUser(loginUser);
+    model.addAttribute("entry", this.entry);
 
     return "janken.html";
   }
