@@ -18,35 +18,13 @@
   <div><a href="/logout">ログアウト</a></div>
   <p th:if="${userName}"> Hi [[${userName}]] </p>
 
+  <p>[[${userName}]] vs [[${opponentName}]]</p>
+
   <a href="/play_janken/Gu">ぐー</a> <a href="/play_janken/Choki">ちょき</a> <a href="/play_janken/Pa">ぱー</a>
 
   <div th:if="${userHand}">あなたの手 [[${userHand}]]</div>
   <div th:if="${opponentHand}">相手の手 [[${opponentHand}]]</div>
   <div th:if="${jankenResult}">結果 [[${jankenResult}]]</div>
-
-  <div th:if="${entry}">
-    <ul>
-      <b>エントリーユーザ: </b>
-      <li th:each="user : ${entry.users}">[[${user}]]</li>
-    </ul>
-  </div>
-
-  <div th:if="${users}">
-    <ul>
-      <b>DB登録済みユーザ一覧: </b>
-      <li th:each="user : ${users}">ID: [[${user.id}]], 名前: <a th:href="@{/match(id=${user.id})}">[[${user.name}]]</a>
-      </li>
-    </ul>
-  </div>
-
-  <div th:if="${matches}">
-    <ul>
-      <b>試合結果一覧: </b>
-      <li th:each="match : ${matches}">[[${match.id}]]. [[${match.user1}]] "[[${match.user1Hand}]]" vs
-        "[[${match.user2Hand}]]" [[${match.user2}]]</li>
-    </ul>
-  </div>
-
 </body>
 
 </html>

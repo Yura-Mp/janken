@@ -70,4 +70,13 @@ public class JankenController {
 
     return "janken.html";
   }
+
+  @GetMapping("/match")
+  public String match(@RequestParam int id, Principal prin, ModelMap model) {
+    User opponentUser = userMapper.selectById(id);
+    model.addAttribute("userName", prin.getName());
+    model.addAttribute("opponentName", opponentUser.getName());
+
+    return "match.html";
+  }
 }
