@@ -76,6 +76,51 @@ public class JankenController {
     User opponentUser = userMapper.selectById(id);
     model.addAttribute("userName", prin.getName());
     model.addAttribute("opponentName", opponentUser.getName());
+    model.addAttribute("opponentId", id);
+
+    return "match.html";
+  }
+
+  @GetMapping("/fight/{userHand}")
+  public String fight(@PathVariable String userHand, @RequestParam int id, Principal prin, ModelMap model) {
+    User opponentUser = userMapper.selectById(id);
+    model.addAttribute("userName", prin.getName());
+    model.addAttribute("opponentName", opponentUser.getName());
+    model.addAttribute("opponentId", id);
+
+    String result;
+    String cpuHand;
+
+    cpuHand = Janken.hand_short_to_str(Janken.cpu_choice_hand(Janken.hand_str_to_short(userHand)));
+
+    switch (Janken.judge(Janken.hand_str_to_short(userHand), Janken.hand_str_to_short(cpuHand))) {
+      case 1:
+        result = "You Win!";
+        break;
+
+      case 0:
+        result = "Draw.";
+        break;
+
+      case -1:
+        result = "You Lose.";
+        break;
+
+      default:
+        result = "Occurred Undefined Error.";
+        break;
+    }
+
+    model.addAttribute("userHand", userHand);
+    model.addAttribute("opponentHand", cpuHand);
+    model.addAttribute("jankenResult", result);
+
+    Match match = new Match();
+    match.setUser1(userMapper.selectByName(prin.getName()).getId());
+    match.setUser2(id);
+    match.setUser1Hand(userHand);
+    match.setUser2Hand(cpuHand);
+    matchMapper.insertMatch(match);
 
     return "match.html";
   }

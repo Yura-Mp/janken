@@ -20,11 +20,14 @@
 
   <p>[[${userName}]] vs [[${opponentName}]]</p>
 
-  <a href="/play_janken/Gu">ぐー</a> <a href="/play_janken/Choki">ちょき</a> <a href="/play_janken/Pa">ぱー</a>
+  <a th:href="@{/fight/Gu(id=${opponentId})}">ぐー</a> <a th:href="@{/fight/Choki(id=${opponentId})}">ちょき</a> <a
+    th:href="@{/fight/Pa(id=${opponentId})}">ぱー</a>
 
   <div th:if="${userHand}">あなたの手 [[${userHand}]]</div>
   <div th:if="${opponentHand}">相手の手 [[${opponentHand}]]</div>
   <div th:if="${jankenResult}">結果 [[${jankenResult}]]</div>
+
+  <p><a href="/janken">もどる</a></p>
 </body>
 
 </html>
