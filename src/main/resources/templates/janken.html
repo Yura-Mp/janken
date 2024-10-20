@@ -30,6 +30,13 @@
     </ul>
   </div>
 
+  <div th:if="${users}">
+    <ul>
+      <b>DB登録済みユーザ: </b>
+      <li th:each="user : ${users}">ID: [[${user.id}]], 名前: [[${user.name}]]</li>
+    </ul>
+  </div>
+
 </body>
 
 </html>
