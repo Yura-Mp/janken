@@ -23,7 +23,7 @@ public class JankenController {
   private MatchMapper matchMapper;
 
   @GetMapping("/janken")
-  public String join_game(Principal prin, ModelMap model) {
+  public String joinGame(Principal prin, ModelMap model) {
     String loginUser = prin.getName();
     model.addAttribute("userName", loginUser);
 
@@ -40,13 +40,13 @@ public class JankenController {
   }
 
   @GetMapping("/play_janken/{userHand}")
-  public String play_game(@PathVariable String userHand, ModelMap model) {
+  public String playGame(@PathVariable String userHand, ModelMap model) {
     String result;
     String cpuHand;
 
-    cpuHand = Janken.hand_short_to_str(Janken.cpu_choice_hand(Janken.hand_str_to_short(userHand)));
+    cpuHand = Janken.handShort2Str(Janken.cpuChoiceHand(Janken.handStr2Short(userHand)));
 
-    switch (Janken.judge(Janken.hand_str_to_short(userHand), Janken.hand_str_to_short(cpuHand))) {
+    switch (Janken.judge(Janken.handStr2Short(userHand), Janken.handStr2Short(cpuHand))) {
       case 1:
         result = "You Win!";
         break;
@@ -91,9 +91,9 @@ public class JankenController {
     String result;
     String cpuHand;
 
-    cpuHand = Janken.hand_short_to_str(Janken.cpu_choice_hand(Janken.hand_str_to_short(userHand)));
+    cpuHand = Janken.handShort2Str(Janken.cpuChoiceHand(Janken.handStr2Short(userHand)));
 
-    switch (Janken.judge(Janken.hand_str_to_short(userHand), Janken.hand_str_to_short(cpuHand))) {
+    switch (Janken.judge(Janken.handStr2Short(userHand), Janken.handStr2Short(cpuHand))) {
       case 1:
         result = "You Win!";
         break;

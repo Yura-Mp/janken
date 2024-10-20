@@ -9,7 +9,7 @@ public class Janken {
    * @param hand String, String型で表されたじゃんけんの手
    * @return short, 変換表(switch-case文)に沿って変換されたshort型のじゃんけんの手を返す.
    */
-  public static short hand_str_to_short(String hand) {
+  public static short handStr2Short(String hand) {
     short res;
     switch (hand) {
       case "Gu":
@@ -38,7 +38,7 @@ public class Janken {
    * @param hand short, short型で表されたじゃんけんの手
    * @return String, 変換表(switch-case文)に沿って変換されたString型のじゃんけんの手を返す.
    */
-  public static String hand_short_to_str(short hand) {
+  public static String handShort2Str(short hand) {
     String res;
     switch (hand) {
       case 0:
@@ -86,11 +86,11 @@ public class Janken {
    * @param myHand short, プレイヤーのじゃんけんの手
    * @return short, CPUが出すじゃんけんの手
    */
-  public static short cpu_choice_hand(short myHand) {
-    return cpu_choice_hand(myHand, 10, 20, 70);
+  public static short cpuChoiceHand(short myHand) {
+    return cpuChoiceHand(myHand, 10, 20, 70);
   }
 
-  public static short cpu_choice_hand(short myHand, int winRate, int drawRate, int loseRate) {
+  public static short cpuChoiceHand(short myHand, int winRate, int drawRate, int loseRate) {
     Random rnd = new Random();
     int samp = rnd.nextInt(winRate + drawRate + loseRate);
     short playRes = 0;
