@@ -32,8 +32,15 @@
 
   <div th:if="${users}">
     <ul>
-      <b>DB登録済みユーザ: </b>
+      <b>DB登録済みユーザ一覧: </b>
       <li th:each="user : ${users}">ID: [[${user.id}]], 名前: [[${user.name}]]</li>
+    </ul>
+  </div>
+
+  <div th:if="${matches}">
+    <ul>
+      <b>試合結果一覧: </b>
+      <li th:each="match : ${matches}">[[${match.id}]]. [[${match.user1}]] "[[${match.user1Hand}]]" vs "[[${match.user2Hand}]]" [[${match.user2}]]</li>
     </ul>
   </div>
 

@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import oit.is.z2395.kaizi.janken.model.Janken;
-import oit.is.z2395.kaizi.janken.model.Entry;
-import oit.is.z2395.kaizi.janken.model.User;
-import oit.is.z2395.kaizi.janken.model.UserMapper;
+import oit.is.z2395.kaizi.janken.model.*;
 
 @Controller
 public class JankenController {
@@ -22,6 +19,8 @@ public class JankenController {
   private Entry entry = new Entry();
   @Autowired
   private UserMapper userMapper;
+  @Autowired
+  private MatchMapper matchMapper;
 
   @GetMapping("/janken")
   public String join_game(Principal prin, ModelMap model) {
@@ -33,6 +32,9 @@ public class JankenController {
 
     ArrayList<User> users = userMapper.selectAllUser();
     model.addAttribute("users", users);
+
+    ArrayList<Match> matches = matchMapper.selectAllMatch();
+    model.addAttribute("matches", matches);
 
     return "janken.html";
   }
