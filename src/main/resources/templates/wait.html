@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>じゃんけんゲーム</title>
+
+  <meta name="author" content="Yura" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+
+</head>
+
+<body>
+  <h1>Janken GAME!</h1>
+
+  <div><a href="/logout">ログアウト</a></div>
+  <p th:if="${userName}"> Hi [[${userName}]] </p>
+
+  <p>[[${userName}]] vs [[${opponentName}]]</p>
+
+  <h2>相手の手を待ってます</h2>
+  <div th:if="${userHand}">あなたの手 [[${userHand}]]</div>
+</body>
+
+</html>

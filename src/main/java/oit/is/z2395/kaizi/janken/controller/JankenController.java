@@ -21,6 +21,8 @@ public class JankenController {
   private UserMapper userMapper;
   @Autowired
   private MatchMapper matchMapper;
+  @Autowired
+  private MatchInfoMapper matchInfoMapper;
 
   @GetMapping("/janken")
   public String joinGame(Principal prin, ModelMap model) {
@@ -88,40 +90,13 @@ public class JankenController {
     model.addAttribute("opponentName", opponentUser.getName());
     model.addAttribute("opponentId", id);
 
-    String result;
-    String cpuHand;
+    MatchInfo matchinfo = new MatchInfo();
+    matchinfo.setUser1(userMapper.selectByName(prin.getName()).getId());
+    matchinfo.setUser2(id);
+    matchinfo.setUser1Hand(userHand);
+    matchinfo.setIsActive(true);
+    matchInfoMapper.startMatch(matchinfo);
 
-    cpuHand = Janken.handShort2Str(Janken.cpuChoiceHand(Janken.handStr2Short(userHand)));
-
-    switch (Janken.judge(Janken.handStr2Short(userHand), Janken.handStr2Short(cpuHand))) {
-      case 1:
-        result = "You Win!";
-        break;
-
-      case 0:
-        result = "Draw.";
-        break;
-
-      case -1:
-        result = "You Lose.";
-        break;
-
-      default:
-        result = "Occurred Undefined Error.";
-        break;
-    }
-
-    model.addAttribute("userHand", userHand);
-    model.addAttribute("opponentHand", cpuHand);
-    model.addAttribute("jankenResult", result);
-
-    Match match = new Match();
-    match.setUser1(userMapper.selectByName(prin.getName()).getId());
-    match.setUser2(id);
-    match.setUser1Hand(userHand);
-    match.setUser2Hand(cpuHand);
-    matchMapper.insertMatch(match);
-
-    return "match.html";
+    return "wait.html";
   }
 }
