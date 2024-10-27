@@ -126,4 +126,28 @@ public class Janken {
 
     return cpuHand;
   }
+
+  public static String outputResult(String yourHand, String opponentHand) {
+    String result;
+
+    switch (Janken.judge(Janken.handStr2Short(yourHand), Janken.handStr2Short(opponentHand))) {
+      case 1:
+        result = "You Win!";
+        break;
+
+      case 0:
+        result = "Draw.";
+        break;
+
+      case -1:
+        result = "You Lose.";
+        break;
+
+      default:
+        result = "Occurred Undefined Error.";
+        break;
+    }
+
+    return result;
+  }
 }

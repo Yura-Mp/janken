@@ -10,6 +10,15 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
 
+  <script type="text/javascript">
+    window.onload = function () {
+      const sse = new EventSource("/fight/waiting");
+      sse.onmessage = function (event) {
+        console.log("Received result!");
+        document.getElementById("result").innerHTML = event.data;
+      }
+    }
+  </script>
 </head>
 
 <body>
@@ -20,8 +29,10 @@
 
   <p>[[${userName}]] vs [[${opponentName}]]</p>
 
-  <h2>相手の手を待ってます</h2>
-  <div th:if="${userHand}">あなたの手 [[${userHand}]]</div>
+  <div id="result">
+    <h2>相手の手を待ってます</h2>
+    <div th:if="${userHand}">あなたの手 [[${userHand}]]</div>
+  </div>
 </body>
 
 </html>
