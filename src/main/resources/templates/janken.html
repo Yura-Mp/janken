@@ -24,6 +24,16 @@
   <div th:if="${opponentHand}">相手の手 [[${opponentHand}]]</div>
   <div th:if="${jankenResult}">結果 [[${jankenResult}]]</div>
 
+  <ul>
+    <b>アクティブな試合: </b>
+    <li th:each="active : ${matchinfos}">
+      id: [[${active.id}]],
+      user1: [[${active.user1}]],
+      user2: [[${active.user2}]],
+      isActive: [[${active.isActive}]]
+    </li>
+  </ul>
+
   <div th:if="${entry}">
     <ul>
       <b>エントリーユーザ: </b>
